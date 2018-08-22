@@ -1,0 +1,23 @@
+#edit /etc/sysconfig/network
+echo "input hostname"
+read hn
+sed -i "/HOST/c\HOSTNAME=$hn" /mnt/root/etc/sysconfig/network
+echo "input gateway"                                                                                                     
+read gw                                                                                                                  
+sed -i "/GATE/c\GATEWAY=$gw" /mnt/root/etc/sysconfig/network                                                             
+
+#fix resolv.conf
+echo "search rolls-royce.local allison.com rollsy-royce.com" > /mnt/root/etc/resolv.conf
+echo "nameserver 10.24.64.12" >> /mnt/root/etc/resolv.conf
+echo "nameserver 10.24.64.13" >> /mnt/root/etc/resolv.conf
+
+#fix ifcfg-eth#
+mv /mnt/root/etc/sysconfig/network-scripts/ifcfg-eth1 /mnt/root/etc/sysconfig/network-scripts/ifcfg-eth0
+sed -i "/DEVICE/c\DEVICE=eth0" /mnt/root/etc/sysconfig/network-scripts/ifcfg-eth0
+echo "enter IP"
+read ip
+sed -i "/IPADDR/c\IPADDR=$ip" /mnt/root/etc/sysconfig/network-scripts/ifcfg-eth0
+echo "enter Subnet Mask"
+read nm
+sed -i "/NETMASK/c\NETMASK=$nm" /mnt/root/etc/sysconfig/network-scripts/ifcfg-eth0
+

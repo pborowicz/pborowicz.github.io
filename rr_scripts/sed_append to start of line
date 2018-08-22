@@ -1,0 +1,1 @@
+sed -i /krb5/s/^/#/ /etc/pam.d/common-auth

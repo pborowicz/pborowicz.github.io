@@ -1,0 +1,1 @@
+echo "testing email on $hostname" | mutt -s "testing email $hostname" -- paul.borowicz@rolls-royce.com

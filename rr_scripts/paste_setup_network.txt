@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#edit /etc/sysconfig/network
+#fix ifcfg-eth#
+#fix resolv.conf
+#fix keyboard layout
+#fix timezone
+
+hn = usindpr-tcd005
+gw = 10.24.64.1
+ip = 10.24.64.239
+nm = 255.255.252.0
+sed -i "/HOST/c\HOSTNAME=$hn" /mnt/root/etc/sysconfig/network
+sed -i "/GATE/c\GATEWAY=$gw" /mnt/root/etc/sysconfig/network                                                             
+sed -i "/IPADDR/c\IPADDR=$ip" /mnt/root/etc/sysconfig/network-scripts/ifcfg-eth0
+sed -i "/NETMASK/c\NETMASK=$nm" /mnt/root/etc/sysconfig/network-scripts/ifcfg-eth0
+echo "search rolls-royce.local allison.com rollsy-royce.com" > /mnt/root/etc/resolv.conf
+echo "nameserver 10.24.64.12" >> /mnt/root/etc/resolv.conf
+echo "nameserver 10.24.64.13" >> /mnt/root/etc/resolv.conf
+
+sed -i '/KEYTABLE/c\KEYTABLE=\"us\"' /mnt/root/etc/sysconfig/keyboard
+sed -i '/LAYOUT/c\LAYOUT=\"us\"' /mnt/root/etc/sysconfig/keyboard
+
+echo 'ZONE=\"America/Indianapolis\"' >/etc/sysconfig/clock
+echo 'UTC=true' >>/etc/sysconfig/clock
+echo 'ARC=false' >>/etc/sysconfig/clock
+/bin/rm /etc/localtime
+ln -s /usr/share/zoneinfo/America/Indianapolis /etc/localtime

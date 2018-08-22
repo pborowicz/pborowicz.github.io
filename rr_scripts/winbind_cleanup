@@ -1,0 +1,4 @@
+/etc/init.d/winbind stop
+###_SLEEP:1000
+kill -9 `ps -ef | grep winbind | cut -d\  -f6`
+ps -ef | grep winbind

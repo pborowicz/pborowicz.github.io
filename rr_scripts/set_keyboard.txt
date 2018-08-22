@@ -1,0 +1,3 @@
+#set uS keymap
+sed -i '/KEYTABLE/c\KEYTABLE=\"us\"' /mnt/root/etc/sysconfig/keyboard
+sed -i '/LAYOUT/c\LAYOUT=\"us\"' /mnt/root/etc/sysconfig/keyboard
